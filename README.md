@@ -25,7 +25,7 @@ Bu proje, teorik bilgi aktarmak yerine öğrencileri **gerçekçi dijital uyarı
 
 ---
 
-## 🖥️ Kullanılan Teknolojiler
+## Kullanılan Teknolojiler
 
 - HTML  
 - CSS  
