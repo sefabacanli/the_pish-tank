@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kimlik Avcısı - Bilişim Mini Testi</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dark-theme">
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Temayı değiştir">☀️</button>
+    <main class="page">
+        <!--
+            Başlangıç ekranı (start screen)
+            - Sayfa ilk açıldığında görünen tam ekran karşılama alanı
+            - Ortada görsel ve altında "Teste Başla" butonu
+        -->
+        <section id="start-screen" class="start-screen" aria-label="Başlangıç Ekranı">
+            <div class="start-screen-inner">
+                <!-- Başlık ve kısa açıklama metni -->
+                <h1 class="title start-title">Kimlik Avcısı – Dijital Güvenlik Testi</h1>
+                <p class="start-text">
+                    Bu uygulama, internette karşılaşabileceğin bildirimleri ve uyarıları nasıl değerlendirdiğini
+                    gözlemlemek için hazırlanmıştır. Sorular ve uyarılar boyunca sakin kalıp dikkatli karar vermeni ister.
+                </p>
+
+                <!-- Ortalanmış, responsive başlangıç görseli -->
+                <div class="start-image-wrapper">
+                    <img
+                        src="images/start_screen.png"
+                        alt="Kimlik avcılığı temalı dijital güvenlik başlangıç ekranı görseli"
+                        class="start-image"
+                    />
+                </div>
+
+                <!-- Görselin altında oyunu başlatmak için buton -->
+                <button id="start-screen-start" class="start-button" type="button">Teste Başla</button>
+            </div>
+        </section>
+
+        <section id="question-1" class="test-container" aria-label="Bilişim Mini Testi" hidden>
+            <h1 class="title">Bilişim Mini Testi</h1>
+            <p class="subtitle">Aşağıdaki soruları cevaplayınız.</p>
+
+            <div class="question-area">
+                <!-- 1. soruya ait açıklayıcı görsel -->
+                <div class="question-image-wrapper question-image-wrapper-q1">
+                    <img
+                        id="question-image"
+                        src="images/q1.png"
+                        alt="Birinci soruya ait kimlik avı örneğini gösteren görsel"
+                        class="question-image question-image-q1"
+                    />
+                </div>
+
+                <p id="question-text" class="question-text">Soru metni burada görünecek.</p>
+
+                <div class="options" id="options-container">
+                    <button class="option" type="button">Seçenek 1</button>
+                    <button class="option" type="button">Seçenek 2</button>
+                    <button class="option" type="button">Seçenek 3</button>
+                </div>
+
+                <div class="controls">
+                    <button id="start-button" type="button">Teste Başla</button>
+                    <button id="next-button" type="button" disabled>Sonraki Soru</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="debrief-screen" class="debrief-screen" aria-label="Değerlendirme" hidden>
+            <h2 class="debrief-title">Bu bir bilişim testi değildi.</h2>
+
+            <!--
+                Kapanış ekranı (end screen)
+                - Test tamamlandığında gösterilen, ortalanmış kapanış görseli
+            -->
+            <div id="end-screen" class="end-screen">
+                <img
+                    src="images/closed_screen.png"
+                    alt="Test tamamlandığında gösterilen dijital güvenlik kapanış ekranı görseli"
+                    class="end-screen-image"
+                />
+            </div>
+
+            <p class="debrief-text">
+                Test sırasında karşılaştığın sistem uyarısı gerçekte sahteydi.<br />
+                Bu tür uyarılar, kullanıcıları hızlıca tıklamaya yönlendirmek için hazırlanabilir.
+            </p>
+
+            <p id="debrief-behavior" class="debrief-text"></p>
+            <p id="debrief-personal" class="debrief-text"></p>
+
+            <div class="debrief-info">
+                <h3 class="debrief-subtitle">Sosyal mühendislik nedir?</h3>
+                <p>
+                    Sosyal mühendislik, teknik açıklar yerine insanların merakını, güvenini veya aceleciliğini
+                    hedef alan ikna yöntemleridir. Amaç, kişinin normalde yapmayacağı bir tıklamayı ya da paylaşımı
+                    ondan rica ederek ya da acele hissettirilerek gerçekleştirmektir.
+                </p>
+
+                <h3 class="debrief-subtitle">Sahte uyarılar neden kullanılır?</h3>
+                <p>
+                    Gerçekmiş gibi görünen uyarılar, kullanıcıların dikkatini dağıtarak onları hızlı karar vermeye
+                    zorlar. Böylece kişi, neye tıkladığını tam incelemeden butonlara basabilir.
+                </p>
+
+                <h3 class="debrief-subtitle">Gerçek hayatta ne yapmalıyız?</h3>
+                <p>
+                    Beklemediğin uyarılar gördüğünde önce sakin kalmak, metni dikkatlice okumak ve kaynağın güvenilir
+                    olup olmadığını sorgulamak önemlidir. Emin değilsen, acele tıklamak yerine bir yetişkine veya
+                    öğretmenine danışmak güvenli bir yaklaşımdır.
+                </p>
+            </div>
+
+            <div class="debrief-info class-summary">
+                <h3 class="debrief-subtitle">Sınıf Gözlemi</h3>
+                <p id="class-summary-text" class="debrief-text"></p>
+            </div>
+
+            <div class="debrief-actions">
+                <button id="debrief-restart" type="button">Tekrar Dene</button>
+            </div>
+        </section>
+
+        <div id="fake-alert-overlay" class="fake-alert-overlay" aria-hidden="true">
+            <div class="fake-alert" role="dialog" aria-modal="true" aria-labelledby="fake-alert-title">
+                <div class="fake-alert-header">
+                    <span class="fake-alert-icon" aria-hidden="true">⚙️</span>
+                    <span id="fake-alert-title" class="fake-alert-title">Tarayıcı performans uyarısı</span>
+                </div>
+                <p class="fake-alert-message">
+                    Bu sadece örnek bir sistem bilgilendirmesidir. Teste güvenle devam edebilirsiniz.
+                </p>
+                <div class="fake-alert-actions">
+                    <button id="fake-alert-close" type="button">Kapat</button>
+                    <button id="fake-alert-details" type="button">Detaylara bak</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="questions.js"></script>
+    <script src="game.js"></script>
+    <!-- Start ekranı ile 1. soru ekranı arasındaki görünürlük geçişlerini yöneten basit script -->
+    <script src="script.js"></script>
+</body>
+</html>

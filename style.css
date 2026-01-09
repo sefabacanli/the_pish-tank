@@ -1,0 +1,475 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.4s ease, color 0.4s ease, filter 0.4s ease;
+}
+
+body.dark-theme {
+    --bg-color: #020617;
+    --text-color: #e5e7eb;
+    --card-bg: #020617;
+    --card-border: #1f2937;
+    --muted-text: #9ca3af;
+    --option-bg: #020617;
+    --option-border: #4b5563;
+    --button-bg: #111827;
+    --button-border: #4b5563;
+    --button-text: #e5e7eb;
+    --alert-overlay-bg: rgba(15, 23, 42, 0.6);
+    --alert-bg: #020617;
+    --alert-border: #1f2937;
+    --alert-text: #e5e7eb;
+}
+
+body.light-theme {
+    --bg-color: #f5f5f5;
+    --text-color: #222222;
+    --card-bg: #ffffff;
+    --card-border: #dddddd;
+    --muted-text: #555555;
+    --option-bg: #f9f9f9;
+    --option-border: #cccccc;
+    --button-bg: #e6e6e6;
+    --button-border: #cccccc;
+    --button-text: #222222;
+    --alert-overlay-bg: rgba(0, 0, 0, 0.08);
+    --alert-bg: #ffffff;
+    --alert-border: #d0d7de;
+    --alert-text: #444444;
+}
+
+body.gloom-1 {
+    background-color: #020311;
+}
+
+body.gloom-2 {
+    filter: contrast(0.9) brightness(0.9);
+}
+
+body.gloom-3 {
+    filter: contrast(0.85) brightness(0.85) blur(1px);
+}
+
+body.gloom-4 {
+    filter: contrast(0.8) brightness(0.8) blur(1.5px);
+}
+
+.page {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.test-container {
+    width: 100%;
+    max-width: 640px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 24px 20px;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.title {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--muted-text);
+}
+
+.question-area {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.question-text {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option {
+    padding: 10px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--option-border);
+    background-color: var(--option-bg);
+    text-align: left;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.option-selected {
+    background-color: #e0ecff;
+    border-color: #aac3ff;
+}
+
+.option:disabled {
+    cursor: default;
+}
+
+body.ui-degraded .test-container {
+    transform: scale(0.96);
+    opacity: 0.96;
+}
+
+body.ui-degraded .title,
+body.ui-degraded .subtitle,
+body.ui-degraded .question-text,
+body.ui-degraded .option {
+    color: #666666;
+}
+
+body.ui-degraded .option {
+    background-color: #f2f2f2;
+}
+
+/*
+    Ekran bozulma / kırılma efekti (screen-glitch)
+    - Sahte uyarılara tıklandığında kısa süreli olarak devreye girer
+    - Hafif titreşim ve küçük bir blur / kontrast değişimi uygular
+    - Göz yormaması için düşük şiddette ve kısa tutulur
+*/
+body.screen-glitch {
+    animation: screen-glitch-shake 0.25s ease-in-out 0s 4 alternate;
+    filter: contrast(1.05) brightness(1.02) blur(1px);
+}
+
+@keyframes screen-glitch-shake {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(-2px, 1px);
+    }
+    50% {
+        transform: translate(2px, -1px);
+    }
+    75% {
+        transform: translate(-1px, 2px);
+    }
+    100% {
+        transform: translate(1px, -2px);
+    }
+}
+
+.controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.controls button {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--button-border);
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    cursor: pointer;
+}
+
+.controls button:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.debrief-screen {
+    width: 100%;
+    max-width: 640px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 24px 20px;
+}
+
+.debrief-title {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.debrief-subtitle {
+    font-size: 1.05rem;
+    margin-top: 14px;
+    margin-bottom: 6px;
+}
+
+.debrief-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    margin-bottom: 12px;
+}
+
+.debrief-info {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+.class-summary {
+    margin-top: 16px;
+}
+
+.debrief-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.debrief-actions button {
+    padding: 8px 14px;
+    border-radius: 4px;
+    border: 1px solid var(--button-border);
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    cursor: pointer;
+}
+
+/*
+    Kapanış ekranı görsel alanı (end-screen)
+    - Test tamamlandığında gösterilen, ortalanmış kapanış görseli
+    - Koyu temayla uyumlu, responsive ve taşma yapmayan yapı
+*/
+.end-screen {
+    width: 100%;                 /* Kapanış kartının tamamını kullan */
+    display: flex;               /* Görseli yatayda ortalamak için esnek kutu kullan */
+    justify-content: center;     /* Görseli yatay eksende ortala */
+    margin-bottom: 16px;         /* Görsel ile açıklama metni arasında boşluk bırak */
+}
+
+.end-screen-image {
+    max-width: 420px;            /* Ekranı taşmayacak makul bir üst sınır */
+    width: 100%;                 /* Küçük ekranlarda bulunduğu alanı doldur */
+    height: auto;                /* En-boy oranını koru */
+    border-radius: 10px;         /* Köşeleri yumuşatarak kartla uyumlu hale getir */
+    border: 1px solid var(--card-border); /* Koyu tema kart kenarlığı ile uyumlu çerçeve */
+}
+/*
+    Ortak soru görseli sınıfı
+    - Tüm soru ekranlarında kullanılacak temel stil
+    - Yatayda ortalanmış, responsive ve maksimum genişlik sınırına sahip görsel
+*/
+.question-image {
+    display: block;                 /* Satır içi öğe yerine blok yaparak kenar boşluklarını kontrol et */
+    margin: 0 auto 16px;            /* Yatayda ortala ve altında soru metni için boşluk bırak */
+    max-width: 380px;               /* Kart genişliğinin tamamını kaplamadan makul bir üst sınır koy */
+    width: 100%;                    /* Küçük ekranlarda bulunduğu alanı doldur */
+    height: auto;                   /* En-boy oranını koru */
+    object-fit: contain;            /* Taşma olmadan tamamını göster */
+}
+
+/*
+    1. soru görseli (q1) için ek ayarlar
+    - Kartın ortasında hizalamaya yardımcı sarmalayıcı ve kenarlık stili
+*/
+.question-image-wrapper-q1 {
+    display: flex;                  /* Görseli yatayda ortalamak için esnek kutu kullan */
+    justify-content: center;        /* Görseli yatay eksende ortala */
+}
+
+.question-image-q1 {
+    border-radius: 8px;             /* Görsel köşelerini yumuşat */
+    border: 1px solid var(--card-border); /* Koyu temayla uyumlu ince kenarlık */
+}
+/*
+    Başlangıç ekranı (start screen)
+    - Tüm ekranı kaplayan koyu arka plan
+    - Ortada görsel ve altında "Teste Başla" butonu
+*/
+.start-screen {
+    /* Tüm görünüm alanını kaplar */
+    width: 100%;
+    min-height: 100vh;
+
+    /* Start screen, sayfa ilk açıldığında tam ekran görünür */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+
+    /* Koyu tema arka planı: mevcut değişkenleri kullanarak sade bir görünüm */
+    background-color: var(--bg-color);
+}
+
+/* Start screen içeriğini kart gibi ortalamak için iç kap */
+.start-screen-inner {
+    width: 100%;
+    max-width: 640px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 28px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.start-title {
+    margin-bottom: 12px;
+}
+
+.start-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--muted-text);
+    margin-bottom: 20px;
+}
+
+.start-image-wrapper {
+    /* Görseli yatayda ortalar ve çevresine nefes alanı bırakır */
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.start-image {
+    /* Responsive görsel: genişlikten taşmaz, oranı korunur */
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+}
+
+.start-button {
+    /* Belirgin ama sade bir buton görünümü */
+    padding: 10px 24px;
+    border-radius: 999px;
+    border: 1px solid var(--button-border);
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+}
+
+.start-button:hover {
+    /* Küçük bir hover efekti ile butonu öne çıkar */
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.start-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Tema değiştirme butonu: sabit konumlu, küçük kapsül şeklinde */
+.theme-toggle {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--button-border);
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-1px);
+}
+
+.fake-alert-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--alert-overlay-bg);
+    z-index: 10;
+}
+
+.fake-alert {
+    width: 100%;
+    max-width: 360px;
+    background-color: var(--alert-bg);
+    border-radius: 8px;
+    border: 1px solid var(--alert-border);
+    padding: 16px 18px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.fake-alert-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.fake-alert-icon {
+    font-size: 1.2rem;
+}
+
+.fake-alert-title {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.fake-alert-message {
+    font-size: 0.9rem;
+    color: var(--alert-text);
+    margin-bottom: 12px;
+}
+
+.fake-alert-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.fake-alert-actions button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--button-border);
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.fake-alert-actions button:hover {
+    background-color: #d9e4ff;
+}
+
+@media (max-width: 480px) {
+    .test-container {
+        padding: 20px 16px;
+    }
+
+    .title {
+        font-size: 1.4rem;
+    }
+}
